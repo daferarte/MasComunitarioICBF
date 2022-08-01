@@ -1,5 +1,5 @@
 from django.db import models
-from mascomunitario.grupos.models import Grupos
+from grupos.models import Grupos
 
 # Create your models here.
 class Listas(models.Model):
