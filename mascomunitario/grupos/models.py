@@ -1,5 +1,5 @@
 from django.db import models
-from mascomunitario.mainapp.models import Personas
+from mainapp.models import Personas
 
 # Create your models here.
 class Grupos(models.Model):
