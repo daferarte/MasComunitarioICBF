@@ -1,11 +1,12 @@
 from django.db import models
 from grupos.models import Grupos
-
+from mainapp.models import Personas
 # Create your models here.
 class Listas(models.Model):
-    cedula=models.CharField(max_length=150, verbose_name='Cedula')
+    cedula=models.CharField(max_length=50, verbose_name='Cedula')
     nombre=models.CharField(max_length=100, verbose_name='Nombre')
     Apellido=models.CharField(max_length=100, verbose_name='apellido')
+    Grupo=models.ManyToManyField(Grupos, verbose_name="Grupo", blank=True)
     create_at=models.DateTimeField(auto_now_add=True,verbose_name='Creado')
     update_at=models.DateTimeField(auto_now=True,verbose_name='Editado')
 
@@ -19,7 +20,7 @@ class Listas(models.Model):
 class Horarios(models.Model):
     nombre=models.CharField(max_length=100, verbose_name='Numero clase')
     Fecha=models.DateTimeField(verbose_name='Fecha')
-    Grupo=models.ManyToManyField(Grupos, verbose_name="Grupo", blank=True)
+    personas = models.ManyToManyField(Personas, verbose_name="Docentes", blank=True)
     create_at=models.DateTimeField(auto_now_add=True,verbose_name='Creado')
     update_at=models.DateTimeField(auto_now=True,verbose_name='Editado')
 
