@@ -33,6 +33,7 @@ class Horarios(models.Model):
 class Asistencia(models.Model):
     Horario=models.ManyToManyField(Horarios, verbose_name="Horarios", blank=True)
     Lista=models.ManyToManyField(Listas, verbose_name="Listas", blank=True)
+    asiste=models.BooleanField(verbose_name='Asistencia')
     create_at=models.DateTimeField(auto_now_add=True,verbose_name='Creado')
     update_at=models.DateTimeField(auto_now=True,verbose_name='Editado')
 

@@ -21,10 +21,10 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy entrypoint.sh
-COPY ./entrypoint.sh .
+COPY ./entrypoint.sh /usr/src/mascomunitario/
 
 # copy project
 COPY . .
 
 # run entrypoint.sh
-ENTRYPOINT ["/usr/src/mascomunitario/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
