@@ -1,6 +1,6 @@
 from django.db import models
 from grupos.models import Grupos
-from mainapp.models import Personas
+from django.contrib.auth.models import User
 # Create your models here.
 class Listas(models.Model):
     cedula=models.CharField(max_length=50, verbose_name='Cedula')
@@ -20,7 +20,7 @@ class Listas(models.Model):
 class Horarios(models.Model):
     nombre=models.CharField(max_length=100, verbose_name='Numero clase')
     Fecha=models.DateTimeField(verbose_name='Fecha')
-    personas = models.ManyToManyField(Personas, verbose_name="Docentes", blank=True)
+    user = models.ManyToManyField(User, verbose_name="Docentes", blank=True)
     create_at=models.DateTimeField(auto_now_add=True,verbose_name='Creado')
     update_at=models.DateTimeField(auto_now=True,verbose_name='Editado')
 
@@ -43,4 +43,4 @@ class Asistencia(models.Model):
         verbose_name_plural='Asistencias'
         
     def __str__(self):
-        return str(self.nombre)
+        return str(self.create_at)
