@@ -20,7 +20,7 @@ class Listas(models.Model):
 class Horarios(models.Model):
     nombre=models.CharField(max_length=100, verbose_name='Numero clase')
     Fecha=models.DateTimeField(verbose_name='Fecha')
-    personas = models.ForeignKey(Personas)
+    personas = models.ForeignKey(Personas, on_delete=models.CASCADE, null=True)
     create_at=models.DateTimeField(auto_now_add=True,verbose_name='Creado')
     update_at=models.DateTimeField(auto_now=True,verbose_name='Editado')
 
