@@ -18,7 +18,7 @@ class HorariosAdmin(admin.ModelAdmin):
 
 class AsistenciaAdmin(admin.ModelAdmin):
     readonly_fields=('create_at','update_at')
-    search_fields = ('Horarios__nombre','Listas__nombre','create_at')
+    search_fields = ('Horarios__nombre','Listas__cedula','create_at')
     #list_filter=('public',)
     list_display = ('create_at','update_at')
     ordering=('-create_at',)
