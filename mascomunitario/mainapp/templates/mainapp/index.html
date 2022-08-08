@@ -3,6 +3,13 @@
 {% block content %}
     <!-- About Start -->
   {% load static %}
+  {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
 
   {% comment %} aqui empieza contenido {% endcomment %}
 

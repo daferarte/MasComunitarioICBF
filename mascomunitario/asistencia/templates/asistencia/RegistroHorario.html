@@ -72,33 +72,25 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Adventure starts here 🚀</h4>
-              <p class="mb-4">Make your app management easy and fun!</p>
+              <h4 class="mb-2">Bienvenido al registro de horarios de clase 🚀</h4>
+              <p class="mb-4">Este es tu documento: {{usuario}}, si no es asi recarga la pagina, si el problema persiste comunicate con el equipo de Base de datos </p>
 
               <form class="mb-3" action="" method="POST">
                 {% csrf_token %}
                 <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
+                  <label for="username" class="form-label">Nombre de la clase</label>
                   {{register_form.nombre}}
                 </div>
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
+                  <label for="email" class="form-label">Fecha de desarrollo de la clase</label>
                   {{register_form.Fecha}}
                 </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">persona</label>
-                  {{register_form.user}}
-                </div>
                 
-                <button class="btn btn-primary d-grid w-100">Sign up</button>
+                
+                <button class="btn btn-primary d-grid w-100">Guardar</button>
               </form>
 
-              <p class="text-center">
-                <span>Already have an account?</span>
-                <a href="auth-login-basic.html">
-                  <span>Sign in instead</span>
-                </a>
-              </p>
+             
             </div>
           </div>
           <!-- Register Card -->
