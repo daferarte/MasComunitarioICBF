@@ -34,7 +34,7 @@ class Personas(models.Model):
     
     tipoDocumento = models.ManyToManyField(TipoDocumento, verbose_name="Tipo de documento", blank=True)
     cedula=models.CharField(max_length=150, verbose_name='Cedula')
-    user=models.OneToOneField(User, editable=False, verbose_name="Usuario", on_delete=models.CASCADE) #clave relacional del modelo de usuarios de django
+    user=models.OneToOneField(User,  verbose_name="Usuario", on_delete=models.CASCADE) #clave relacional del modelo de usuarios de django
     image=models.ImageField(default='null', verbose_name="Imagen", upload_to="users")
     public=models.BooleanField(verbose_name="¿Publicado?")
     fNacimiento = models.DateField(null=True, blank=True, verbose_name="Fecha de cumpleaños" )
