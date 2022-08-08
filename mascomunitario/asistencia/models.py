@@ -32,8 +32,8 @@ class Horarios(models.Model):
         return str(self.nombre)
 
 class Asistencia(models.Model):
-    Horario=models.ManyToManyField(Horarios, verbose_name="Horarios", blank=True)
-    Lista=models.ManyToManyField(Listas, verbose_name="Listas", blank=True)
+    Horario=models.ForeignKey(Horarios, verbose_name="Horarios", blank=True, on_delete=models.CASCADE, null=True)
+    Lista=models.ForeignKey(Listas, verbose_name="Listas", blank=True, on_delete=models.CASCADE, null=True)
     asiste=models.BooleanField(verbose_name='Asistencia',blank=True, default=False)
     create_at=models.DateTimeField(auto_now_add=True,verbose_name='Creado')
     update_at=models.DateTimeField(auto_now=True,verbose_name='Editado')
