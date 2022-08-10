@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from mainapp.models import Personas
 from grupos.models import Grupos
@@ -11,7 +11,11 @@ def listasdeasistencia(request):
     grupos=Grupos.objects.filter(personas__id__in=docente)
     listas=Listas.objects.filter(Grupo__id__in=grupos)
     horarios=Horarios.objects.filter(personas__id__in=docente).order_by('-create_at')[: 1]
-    idh=Horarios.objects.get(pk=horarios)
+    try:
+        idh=get_object_or_404(Horarios,pk=horarios)
+    except:
+        idh='Aun no se a creado un horario'
+        
     asistencia=Asistencia.objects.filter(Horario__id__in=horarios, Lista__id__in=listas)
     if request.method == 'POST':
         for i in listas:            
