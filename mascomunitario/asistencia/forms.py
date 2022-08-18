@@ -3,8 +3,6 @@ from django.core import validators
 
 from .models import Horarios
 
-
-
 class DateTimeInput(forms.DateTimeInput):
     input_type = 'datetime-local'
 
@@ -17,3 +15,4 @@ class RegisterForm(forms.ModelForm):
         model = Horarios
         fields = ['nombre','Fecha']
         exclude = ['personas']
+        

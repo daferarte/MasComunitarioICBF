@@ -3,6 +3,11 @@ from grupos.models import Grupos
 from django.contrib.auth.models import User
 
 # Create your models here.
+estados_curso=[
+    (1,'Disponible'),
+    (2,'No Disponible')
+]
+
 class Listas(models.Model):
     cedula=models.CharField(max_length=50, verbose_name='Cedula')
     nombre=models.CharField(max_length=100, verbose_name='Nombre')
@@ -19,7 +24,11 @@ class Listas(models.Model):
         return str(self.cedula)
 
 class Horarios(models.Model):
-    nombre=models.CharField(max_length=100, verbose_name='Numero clase')
+    #nombre=models.CharField(max_length=100, verbose_name='Numero clase')
+    nombre=models.IntegerField(
+        null=False,blank=False,
+        choices=estados_curso
+    )
     Fecha=models.DateTimeField(verbose_name='Fecha')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     create_at=models.DateTimeField(auto_now_add=True,verbose_name='Creado')
