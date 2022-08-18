@@ -30,18 +30,15 @@ def listasdeasistencia(request):
             else:
                 asiste = True 
             
-            print(idh)
-            print(i)
-            print(asiste)
-
             asistencia=Asistencia(
                 Horario=idh,
                 Lista=i,
                 asiste=asiste
             )
             asistencia.save()
-            messages.success(request,'Registrado Correctamente')
-            return redirect('index')
+            
+        messages.success(request,'Registrado Correctamente')
+        return redirect('index')
 
     return render(request, 'asistencia/asistencia.html', {
         'title': 'Home',
