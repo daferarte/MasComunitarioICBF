@@ -19,21 +19,23 @@ def listasdeasistencia(request):
     
     asistentes=Asistencia.objects.filter(Horario__id__in=horarios, Lista__id__in=listas)
     
-
     if request.method == 'POST':
         for i in listas:            
             #Horario = int(request.POST.get('idh'+str(i.id)))
-            Lista = int(i.id)
+            
             if (request.POST.get('estado'+str(i.id)) is None) : 
                 asiste = False
             else:
                 asiste = True 
             
+            print(idh)
+            print(i)
+            print(asiste)
+
             asistencia=Asistencia(
                 Horario=idh,
                 Lista=i,
                 asiste=asiste
-                
             )
             asistencia.save()
             messages.success(request,'Registrado Correctamente')
