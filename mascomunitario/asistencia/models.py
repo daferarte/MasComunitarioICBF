@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 estados_curso=[
-    (1,'Encuentro Grupal'),
-    (2,'Encuentro Situado'),
-    (3,'Bitacora'),
-    (4,'Entrega de OVA'),
+    ('Encuentro Grupal','Encuentro Grupal'),
+    ('Encuentro Situado','Encuentro Situado'),
+    ('Bitacora','Bitacora'),
+    ('Entrega de OVA','Entrega de OVA'),
 ]
 class Listas(models.Model):
     cedula=models.CharField(max_length=50, verbose_name='Cedula')
@@ -26,7 +26,7 @@ class Listas(models.Model):
         return str(self.cedula)
 
 class Horarios(models.Model):
-    nombre=models.CharField(max_length=100, verbose_name='Numero clase')
+    nombre=models.CharField(max_length=100, verbose_name='Numero clase', choices=estados_curso)
     Fecha=models.DateTimeField(verbose_name='Fecha')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     create_at=models.DateTimeField(auto_now_add=True,verbose_name='Creado')
