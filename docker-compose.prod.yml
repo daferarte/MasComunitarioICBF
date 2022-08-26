@@ -15,12 +15,13 @@ services:
     env_file:
       - ./.env.prod
     depends_on:
-      - db
-  db:
+      - db_prod
+  db_prod:
     restart: always
     image: postgres:12.0-alpine
+    network_mode: host
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data/
+      - ./postgres_data_prod:/var/lib/postgresql/data/
     env_file:
       - ./.env.prod.db  
   nginx:
@@ -29,10 +30,10 @@ services:
     volumes:
       - ./mascomunitario/static:/home/app/web/static
       - ./mascomunitario/media:/home/app/web/media
-      - /etc/ssl/certs/propios/unicesmag:/certs
+      #- /etc/ssl/certs/propios/unicesmag:/certs
     ports:
       - 80:80
-      - 443:443
+      #- 443:443
     depends_on:
       - web
 
