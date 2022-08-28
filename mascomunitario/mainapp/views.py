@@ -45,7 +45,10 @@ def logout_user(request):
 @login_required(login_url='login/')
 def ActDatosUsu(request):
     usuario = User.objects.get(pk=request.user.id)
-    persona = Personas.objects.get(user=usuario)
+    try:
+        persona = Personas.objects.get(user=usuario)
+    except Personas.DoesNotExist:
+        persona = None
     tdocumentos = TipoDocumento.objects.all()
 
     if request.method == 'POST':
@@ -86,7 +89,18 @@ def ActDatosUsu(request):
         tel = request.POST.get('phoneNumber')
 
         User.objects.filter(pk=request.user.id).update(first_name=nombre, last_name=apellido, email=mail, password=passwd)
-        Personas.objects.filter(user=request.user.id).update(tipoDocumento=tdocu, cedula=cedula, telefono=tel)
+
+        if persona is not None:
+            Personas.objects.filter(user=request.user.id).update(tipoDocumento=tdocu, cedula=cedula, telefono=tel)
+        else:
+            perso = Personas(
+                tipoDocumento=TipoDocumento.objects.get(pk=tdocu),
+                cedula=cedula,
+                telefono=tel,
+                user=usuario,
+                public=True
+            )
+            perso.save()
         messages.success(request, 'Datos actualizados con exito')
         return redirect('index')
 

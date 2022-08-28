@@ -24,7 +24,7 @@ class Personas(models.Model):
     tipoDocumento = models.ForeignKey(TipoDocumento, verbose_name="Tipo de documento", blank=True, on_delete=models.CASCADE, null=True)
     cedula = models.CharField(max_length=150, verbose_name='Cedula')
     user = models.OneToOneField(User, verbose_name="Usuario", on_delete=models.CASCADE)  # clave relacional del modelo de usuarios de django
-    image = models.ImageField(default='null', verbose_name="Imagen", upload_to="users")
+    image = models.ImageField(default='null', verbose_name="Imagen", upload_to="users", null=True, blank=True)
     public = models.BooleanField(verbose_name="¿Publicado?")
     fNacimiento = models.DateField(null=True, blank=True, verbose_name="Fecha de cumpleaños")
     telefono = PhoneNumberField(null=True, blank=True, verbose_name="Teléfono")
