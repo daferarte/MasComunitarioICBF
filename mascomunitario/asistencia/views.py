@@ -50,7 +50,7 @@ def listasdeasistencia(request):
 
 @login_required(login_url='login/')
 def VerHorarios(request):
-    
+
     docente = User.objects.filter(pk=request.user.id)[: 1]
     horarios = Horarios.objects.filter(user__id__in=docente).order_by('-create_at')
 
@@ -62,13 +62,13 @@ def VerHorarios(request):
 
 @login_required(login_url='login/')
 def ActListasAsistencia(request, horario_id):
-    
+
     docente = User.objects.filter(pk=request.user.id)[: 1]
     grupos = Grupos.objects.filter(usuario__id__in=docente)
     listas = Listas.objects.filter(Grupo__id__in=grupos)
     horario = get_object_or_404(Horarios, id=horario_id)
     asistentes = Asistencia.objects.filter(Horario=horario, Lista__id__in=listas)
-    
+
     if request.method == 'POST':
         for i in listas:
             #  Horario = int(request.POST.get('idh'+str(i.id)))
@@ -76,9 +76,9 @@ def ActListasAsistencia(request, horario_id):
                 asiste = False
             else:
                 asiste = True
-            
-            asistentes = Asistencia.objects.filter(Horario=horario, Lista=i).update(asiste = asiste)
-            
+
+            asistentes = Asistencia.objects.filter(Horario=horario, Lista=i).update(asiste=asiste)
+
         messages.success(request, 'Registrado Correctamente')
         return redirect('ActAsistencia', horario_id)
 

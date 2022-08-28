@@ -27,7 +27,7 @@ class Personas(models.Model):
     image = models.ImageField(default='null', verbose_name="Imagen", upload_to="users")
     public = models.BooleanField(verbose_name="¿Publicado?")
     fNacimiento = models.DateField(null=True, blank=True, verbose_name="Fecha de cumpleaños")
-    telefono = PhoneNumberField(null = True, blank = True, verbose_name="Teléfono")
+    telefono = PhoneNumberField(null=True, blank=True, verbose_name="Teléfono")
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Creado')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Editado')
 
