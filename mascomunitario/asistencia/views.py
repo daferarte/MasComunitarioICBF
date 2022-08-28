@@ -37,7 +37,7 @@ def listasdeasistencia(request):
             )
             asistencia.save()
         messages.success(request, 'Registrado Correctamente')
-        return redirect('index')
+        return redirect('Asistencia')
 
     return render(request, 'asistencia/asistencia.html', {
         'title': 'Home',
@@ -45,6 +45,47 @@ def listasdeasistencia(request):
         'grupos': grupos,
         'horarios': idh,
         'asistencia': asistentes
+    })
+
+
+@login_required(login_url='login/')
+def VerHorarios(request):
+    
+    docente = User.objects.filter(pk=request.user.id)[: 1]
+    horarios = Horarios.objects.filter(user__id__in=docente).order_by('-create_at')
+
+    return render(request, 'asistencia/ListaHorarios.html', {
+        'title': 'Home',
+        'horarios': horarios,
+    })
+
+
+@login_required(login_url='login/')
+def ActListasAsistencia(request, horario_id):
+    
+    docente = User.objects.filter(pk=request.user.id)[: 1]
+    grupos = Grupos.objects.filter(usuario__id__in=docente)
+    listas = Listas.objects.filter(Grupo__id__in=grupos)
+    horario = get_object_or_404(Horarios, id=horario_id)
+    asistentes = Asistencia.objects.filter(Horario=horario, Lista__id__in=listas)
+    
+    if request.method == 'POST':
+        for i in listas:
+            #  Horario = int(request.POST.get('idh'+str(i.id)))
+            if (request.POST.get('estado' + str(i.id)) is None):
+                asiste = False
+            else:
+                asiste = True
+            
+            asistentes = Asistencia.objects.filter(Horario=horario, Lista=i).update(asiste = asiste)
+            
+        messages.success(request, 'Registrado Correctamente')
+        return redirect('ActAsistencia', horario_id)
+
+    return render(request, 'asistencia/actasistencia.html', {
+        'title': 'Home',
+        'horarios': horario,
+        'personas': asistentes
     })
 
 
