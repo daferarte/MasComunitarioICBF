@@ -56,14 +56,16 @@
                     </div>
                     <div class="flex-grow-1">
                         <span class="fw-semibold d-block">{{user.first_name}} {{user.last_name}}</span>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">{{user.username}}</small>
                     </div>
                     </div>
                 </a>
                 </li>
+
                 <li>
                 <div class="dropdown-divider"></div>
                 </li>
+{% comment %}                 
                 <li>
                 <a class="dropdown-item" href="#">
                     <i class="bx bx-user me-2"></i>
@@ -88,7 +90,7 @@
                 <li>
                 <div class="dropdown-divider"></div>
                 </li>
-                <li>
+                <li> {% endcomment %}
                                      
                     
                 <a class="dropdown-item" href="{%url 'logout'%}">
