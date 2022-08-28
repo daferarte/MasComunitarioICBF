@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Personas, TipoDocumento, Rol
+from .models import Personas, TipoDocumento
 
 
 # Register your models here.
@@ -23,13 +23,5 @@ class TipoDocumentoAdmin(admin.ModelAdmin):
     ordering = ('-create_at',)
 
 
-class RolAdmin(admin.ModelAdmin):
-    readonly_fields = ('create_at', 'update_at')
-    search_fields = ('nombre', 'Personas__cedula', 'fNacimiento')
-    list_display = ('nombre', 'create_at', 'update_at')
-    ordering = ('-create_at',)
-
-
 admin.site.register(Personas, PersonasAdmin)
 admin.site.register(TipoDocumento, TipoDocumentoAdmin)
-admin.site.register(Rol, RolAdmin)
