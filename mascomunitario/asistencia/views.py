@@ -13,11 +13,10 @@ from django.contrib.auth.decorators import login_required
 def listasdeasistencia(request, grupo=None):
     docente = User.objects.filter(pk=request.user.id)[: 1]
     lgrupo = Grupos.objects.filter(usuario__id__in=docente)
-    if(grupo==None):
+    if grupo is None:
         grupos = Grupos.objects.filter(usuario__id__in=docente)
     else:
-        grupos = Grupos.objects.filter(usuario__id__in=docente,pk=grupo)
-    
+        grupos = Grupos.objects.filter(usuario__id__in=docente, pk=grupo)
     listas = Listas.objects.filter(Grupo__id__in=grupos)
     horarios = Horarios.objects.filter(user__id__in=docente).order_by('-create_at')[: 1]
     try:
