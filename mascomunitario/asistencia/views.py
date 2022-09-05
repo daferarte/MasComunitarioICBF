@@ -10,9 +10,14 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required(login_url='login/')
-def listasdeasistencia(request):
+def listasdeasistencia(request, grupo=None):
     docente = User.objects.filter(pk=request.user.id)[: 1]
-    grupos = Grupos.objects.filter(usuario__id__in=docente)
+    lgrupo = Grupos.objects.filter(usuario__id__in=docente)
+    if(grupo==None):
+        grupos = Grupos.objects.filter(usuario__id__in=docente)
+    else:
+        grupos = Grupos.objects.filter(usuario__id__in=docente,pk=grupo)
+    
     listas = Listas.objects.filter(Grupo__id__in=grupos)
     horarios = Horarios.objects.filter(user__id__in=docente).order_by('-create_at')[: 1]
     try:
@@ -42,7 +47,7 @@ def listasdeasistencia(request):
     return render(request, 'asistencia/asistencia.html', {
         'title': 'Home',
         'personas': listas,
-        'grupos': grupos,
+        'grupos': lgrupo,
         'horarios': idh,
         'asistencia': asistentes
     })
