@@ -5,9 +5,9 @@ from .models import Horarios
 
 estados_curso = [
     ('Encuentro Grupal', 'Encuentro Grupal'),
-    ('Encuentro Situado', 'Encuentro Situado'),
+    ('Acompañamiento Situado', 'Acompañamiento Situado'),
     ('Bitacora', 'Bitacora'),
-    ('Entrega de OVA', 'Entrega de OVA'),
+    ('OVA', 'OVA'),
 ]
 
 
